@@ -16,7 +16,7 @@ body, canvas {
 }
 
 .time p {
-    color: white;
+    color: #111111;
     font-family: "Verdana", sans-serif;
     text-align: center;
 }
