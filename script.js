@@ -15,7 +15,12 @@ $( document ).ready(function() {
 
 			// 18:00
 			myWeather[2] = new Weather(data.list[3].dt_txt, data.list[3].weather[0].main, data.list[3].rain["3h"], data.list[3].wind.speed, data.list[3].main.humidity, data.list[3].main.temp);
+			
 			dataReady = true;
+			// Display time on website
+			document.getElementById("time0").innerHTML = myWeather[0].time.substring(11,16);
+			document.getElementById("time1").innerHTML = myWeather[1].time.substring(11,16);
+			document.getElementById("time2").innerHTML = myWeather[2].time.substring(11,16);
 		});
 	})();
 

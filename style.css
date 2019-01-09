@@ -2,3 +2,21 @@ body, canvas {
     margin: 0;
     padding: 0;
 }
+
+.times {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 50vh;
+}
+
+.time {
+    flex: 50%;
+}
+
+.time p {
+    color: white;
+    font-family: "Verdana", sans-serif;
+    text-align: center;
+}
