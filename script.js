@@ -8,13 +8,13 @@ $( document ).ready(function() {
 		.done(function( data ) {
 			console.log(data);
 			// 9:00
-			myWeather[0] = new Weather(data.list[0].dt, data.list[0].weather[0].main, data.list[0].rain["3h"], data.list[0].wind.speed, data.list[0].main.humidity, data.list[0].main.temp);
+			myWeather[0] = new Weather(data.list[0].dt_txt, data.list[0].weather[0].main, data.list[0].rain["3h"], data.list[0].wind.speed, data.list[0].main.humidity, data.list[0].main.temp);
 
 			// 15:00
-			myWeather[1] = new Weather(data.list[2].dt, data.list[2].weather[0].main, data.list[2].rain["3h"], data.list[2].wind.speed, data.list[2].main.humidity, data.list[2].main.temp);
+			myWeather[1] = new Weather(data.list[2].dt_txt, data.list[2].weather[0].main, data.list[2].rain["3h"], data.list[2].wind.speed, data.list[2].main.humidity, data.list[2].main.temp);
 
 			// 18:00
-			myWeather[2] = new Weather(data.list[3].dt, data.list[3].weather[0].main, data.list[3].rain["3h"], data.list[3].wind.speed, data.list[3].main.humidity, data.list[3].main.temp);
+			myWeather[2] = new Weather(data.list[3].dt_txt, data.list[3].weather[0].main, data.list[3].rain["3h"], data.list[3].wind.speed, data.list[3].main.humidity, data.list[3].main.temp);
 			dataReady = true;
 		});
 	})();
@@ -27,6 +27,7 @@ $( document ).ready(function() {
 			this.windSpeed = windSpeed;
 			this.humidity = humidity;
 			this.temperature = temperature;
+			console.log("Time: " + this.time + ", Description: " + this.weatherDescription + ", Rain 3h: " + this.rain3h + ", Wind speed: " + this.windSpeed + ", Humidity: " + this.humidity + ", Temperature: " + this.temperature)
 		}
 
 		isRaining () {
