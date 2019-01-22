@@ -105,6 +105,15 @@ function displayTemperature (index) {
 
   function mirror () {
 	  isMirrored = !isMirrored;
+	  if (!isMirrored) {
+		document.getElementById("time0").innerHTML = myWeather[0].time.substring(11,16);
+		document.getElementById("time1").innerHTML = myWeather[1].time.substring(11,16);
+		document.getElementById("time2").innerHTML = myWeather[2].time.substring(11,16);
+	} else {
+		document.getElementById("time2").innerHTML = myWeather[0].time.substring(11,16);
+		document.getElementById("time1").innerHTML = myWeather[1].time.substring(11,16);
+		document.getElementById("time0").innerHTML = myWeather[2].time.substring(11,16);
+	}
   }
 
   class Projectile {
