@@ -20,3 +20,10 @@ body, canvas {
     font-family: "Verdana", sans-serif;
     text-align: center;
 }
+
+button {
+    position: absolute;
+    margin-top: 50vh;
+    margin-left: 50vw;
+    z-index: 100;
+}

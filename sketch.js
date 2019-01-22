@@ -1,5 +1,6 @@
 let scale;
 let projectiles = [];
+let isMirrored = false;
 
 function setup () {
 	createCanvas(windowWidth, windowHeight);
@@ -28,7 +29,11 @@ function displayTemperature (index) {
 		let tempOnScale = ((myWeather[index].temperature + 10) * 0.01 * scale.width * 2.5);
 		let c = scale.get(int(tempOnScale), scale.height / 2);
 		fill(c);
-		rect(index * (windowWidth/3),  0, (windowWidth/3), (windowHeight/3 * 2));
+		if (isMirrored) {
+			rect((2 - index) * (windowWidth/3),  0, (windowWidth/3), (windowHeight/3 * 2));
+		} else {
+			rect(index * (windowWidth/3),  0, (windowWidth/3), (windowHeight/3 * 2));
+		}
   }
 
   function displayGroundWetness (index) {
@@ -51,28 +56,55 @@ function displayTemperature (index) {
 			factor = factor + (myWeather[index].temperature / 300);
 		}
 
-		if (factor >= 1.0) {
-			fill(0, 0, 255);
-			rect(index * (windowWidth/3),  windowHeight * (2/3), (windowWidth/3), (windowHeight/3 * 2));
+		if (isMirrored) {
+			if (factor >= 1.0) {
+				fill(0, 0, 255);
+				rect((2-index) * (windowWidth/3),  windowHeight * (2/3), (windowWidth/3), (windowHeight/3 * 2));
+			} else {
+				fill(255, 255, 255);
+				rect((2-index) * (windowWidth/3),  windowHeight * (2/3), (windowWidth/3), (windowHeight/3 * 2));
+			}
 		} else {
-			fill(255, 255, 255);
-			rect(index * (windowWidth/3),  windowHeight * (2/3), (windowWidth/3), (windowHeight/3 * 2));
+			if (factor >= 1.0) {
+				fill(0, 0, 255);
+				rect(index * (windowWidth/3),  windowHeight * (2/3), (windowWidth/3), (windowHeight/3 * 2));
+			} else {
+				fill(255, 255, 255);
+				rect(index * (windowWidth/3),  windowHeight * (2/3), (windowWidth/3), (windowHeight/3 * 2));
+			}
 		}
   }
 
   function displayRain (index) {
 		if (myWeather[index].isRaining()) {
-			if (random(0, 1) > 0.9) {
-				projectiles.push(new Projectile(int(random(windowWidth * (index) / 3, windowWidth * (1 + index) / 3)), int(random(0, windowHeight)), windowHeight / 6));
-			}
-
-			projectiles.forEach(function(element) {
-				if (element.w > 1) {
-					element.display();
+			if (isMirrored) {
+				if (random(0, 1) > 0.9) {
+					projectiles.push(new Projectile(int(random(windowWidth * (2-index) / 3, windowWidth * (1 + (2-index)) / 3)), int(random(0, windowHeight)), windowHeight / 6));
 				}
-			});
-			projectiles = projectiles.filter(element => element.w >= 0);
+	
+				projectiles.forEach(function(element) {
+					if (element.w > 1) {
+						element.display();
+					}
+				});
+				projectiles = projectiles.filter(element => element.w >= 0);
+			} else {
+				if (random(0, 1) > 0.9) {
+					projectiles.push(new Projectile(int(random(windowWidth * (index) / 3, windowWidth * (1 + index) / 3)), int(random(0, windowHeight)), windowHeight / 6));
+				}
+	
+				projectiles.forEach(function(element) {
+					if (element.w > 1) {
+						element.display();
+					}
+				});
+				projectiles = projectiles.filter(element => element.w >= 0);
+			}
 		}
+  }
+
+  function mirror () {
+	  isMirrored = !isMirrored;
   }
 
   class Projectile {
