@@ -1,6 +1,6 @@
 let scale;
 let projectiles = [];
-let isMirrored = false;
+let isMirrored = true;
 
 function setup () {
 	createCanvas(windowWidth, windowHeight);
